@@ -1,0 +1,61 @@
+<body class="dark-theme">
+  <mat-toolbar color="primary" style="box-shadow: 0 4px 8px 0 rgba(198, 169, 169, 0.2);">
+    <span class="mat-title">Login Page</span>
+    <app-dark-mode-toggle></app-dark-mode-toggle>
+  </mat-toolbar>
+  
+  <section class="vh-100" style="background: linear-gradient(to bottom, #e4e2e6, #403056);">
+    <div class="container-fluid p-5" [ngClass]="{'blur-content': loading}">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <div class="card" style="box-shadow: 0 4px 8px 0 rgba(151, 151, 163, 0.2); background: linear-gradient(to bottom, #8b8bd5, #b3aece);">
+            <div class="card-body text-center">
+              <h2 style="color: aliceblue;">Login Form</h2>
+              <form [formGroup]="userForm">
+                <div class="mb-3">
+                  <div class="form-group">
+                    <mat-form-field class="custom-mat-form-field" appearance="fill" style="width: 25vw;">
+                      <mat-label class="text-white">Email address</mat-label>
+                      <input matInput type="email" formControlName="email" matInput placeholder="pat@example.com" class="custom-mat-form-field">
+                      <mat-error *ngIf="email.invalid">{{getErrorMessageMail()}}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                
+                <div class="mb-3" style="width: 100%;">
+                  <div class="form-group">
+                    <mat-form-field class="custom-mat-form-field" appearance="fill" style="width: 25vw;">
+                      <mat-label class="text-white">Password</mat-label>
+                      <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" placeholder="Enter a Password">                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                
+  
+                <div class="mb-3 form-check text-center">
+                  <p class="small fw-bold mt-2 pt-1 mb-0 text-white">Don't have an account?
+                    <a routerLink="/adduser/:login" class="link-danger">Register</a>
+                  </p>
+                </div>
+                <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;" (click)="login()">Login</button>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="loading-spinner top-centered">
+      <div class="spinner"></div>
+    </div>
+  </section>
+</body>
+  
+  
+  
+  
+
